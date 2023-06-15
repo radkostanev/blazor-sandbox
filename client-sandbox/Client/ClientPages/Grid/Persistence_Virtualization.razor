@@ -1,0 +1,52 @@
+@page "/grid/persistance/virtualization"
+
+@inject ProductService ProductService
+
+@inject LocalStorage LocalStorage
+
+<div class="example-wrapper">
+    <button @onclick="@ResetState"> Reset State </button>
+</div>
+<TelerikGrid @ref="@Grid"
+             Data="@GridData"
+             Height="400px"
+             RowHeight="60"
+             PageSize="10"
+             ScrollMode="@GridScrollMode.Virtual"
+             OnStateInit="@((GridStateEventArgs<Product> args) => OnStateInit(args))"
+             OnStateChanged="@((GridStateEventArgs<Product> args) => OnStateChanged(args))">
+    <GridColumns>
+        <GridColumn Field=@nameof(Product.ProductName) Title="Product Name" Width="150px" />
+        <GridColumn Field=@nameof(Product.UnitPrice) Title="Unit Price" />
+        <GridColumn Field=@nameof(Product.UnitsInStock) Title="Units in stock" />
+        <GridColumn Field=@nameof(Product.CreatedAt) Title="Date created" />
+        <GridColumn Field=@nameof(Product.Discontinued) Title="Discontinued" />
+    </GridColumns>
+</TelerikGrid>
+
+@code {
+    public TelerikGrid<Product> Grid { get; set; }
+    public List<Product> GridData { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        GridData = (await ProductService.GetProductsAsync(40, true)).ToList();
+    }
+
+    async Task OnStateInit(GridStateEventArgs<Product> args)
+    {
+        args.GridState = await LocalStorage.GetItem<GridState<Product>>("gridStateVirt");
+    }
+
+    async void OnStateChanged(GridStateEventArgs<Product> args)
+    {
+        await LocalStorage.SetItem("gridStateVirt", args.GridState);
+    }
+
+    private void ResetState()
+    {
+        Grid?.SetStateAsync(null);
+        LocalStorage.RemoveItem("gridStateVirt");
+    }
+}
+

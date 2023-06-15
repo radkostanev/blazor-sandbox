@@ -1,0 +1,188 @@
+@page "/treelist/persistance/editing"
+@using Telerik.DataSource
+@using Playground.Shared.Models.TreeList
+
+@inject LocalStorage LocalStorage
+
+<div class="example-wrapper">
+    <button @onclick="@ResetUserState"> Reset User Stored State </button>
+</div>
+
+<TelerikTreeList @ref="@TreeList"
+                 Data="@Data"
+                 ItemsField="Items"
+                 HasChildrenField="HasChildren"
+                 Pageable="true"
+                 EditMode="TreeListEditMode.Inline"
+                 OnUpdate="@UpdateItem"
+                 OnDelete="@DeleteItem"
+                 OnCreate="@CreateItem"
+                 Resizable="true"
+                 Reorderable="true"
+                 OnStateInit="@((TreeListStateEventArgs<HierarchicalItem> args) => OnStateInit(args))"
+                 OnStateChanged="@((TreeListStateEventArgs<HierarchicalItem> args) => OnStateChanged(args))">
+    <TreeListToolBarTemplate>
+        <TreeListCommandButton Command="Add" Icon="@FontIcon.Plus">Add</TreeListCommandButton>
+    </TreeListToolBarTemplate>
+    <TreeListColumns>
+        <TreeListCheckboxColumn></TreeListCheckboxColumn>
+        <TreeListColumn Field="Id" Editable="false"></TreeListColumn>
+        <TreeListColumn Field="FirstName" Expandable="true" Width="300px"></TreeListColumn>
+        <TreeListColumn Field="HireDate" Width="300px"></TreeListColumn>
+        <TreeListCommandColumn>
+            <TreeListCommandButton Command="Add" Icon="@FontIcon.Plus">Add Child</TreeListCommandButton>
+            <TreeListCommandButton Command="Edit" Icon="@FontIcon.Pencil">Edit</TreeListCommandButton>
+            <TreeListCommandButton Command="Delete" Icon="@FontIcon.Trash">Delete</TreeListCommandButton>
+            <TreeListCommandButton Command="Save" Icon="@FontIcon.Save" ShowInEdit="true">Update</TreeListCommandButton>
+            <TreeListCommandButton Command="Cancel" Icon="FontIcon.X" ShowInEdit="true">Cancel</TreeListCommandButton>
+        </TreeListCommandColumn>
+    </TreeListColumns>
+</TelerikTreeList>
+
+@code {
+    public TelerikTreeList<HierarchicalItem> TreeList { get; set; }
+    public int LastId { get; set; } = 1;
+
+    List<HierarchicalItem> Data { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var dData = new List<HierarchicalItem>();
+
+        for (int i = 1; i < 6; i++)
+        {
+            var newItem = new HierarchicalItem()
+            {
+                Id = LastId,
+                FirstName = "Employee  " + i.ToString(),
+                Items = new List<HierarchicalItem>(),
+                HasChildren = true
+            };
+
+            dData.Add(newItem);
+            LastId++;
+
+            for (int j = 0; j < 5; j++)
+            {
+                newItem.Items.Add(new HierarchicalItem()
+                {
+                    Id = LastId,
+                    FirstName = "    Employee " + i + " : " + j.ToString()
+                });
+
+                LastId++;
+            }
+        }
+
+        Data = await Task.FromResult(dData);
+    }
+
+    async Task OnStateInit(TreeListStateEventArgs<HierarchicalItem> args)
+    {
+        args.TreeListState = await LocalStorage.GetItem<TreeListState<HierarchicalItem>>("treeListEditingState");
+    }
+
+    void OnStateChanged(TreeListStateEventArgs<HierarchicalItem> args)
+    {
+        var state = args.TreeListState;
+
+        // Skip saving Expanded items to reduce state size in local storage.
+        state.ExpandedItems = null;
+
+        LocalStorage.SetItem("treeListEditingState", state);
+    }
+
+    private void UpdateItem(TreeListCommandEventArgs args)
+    {
+        var item = args.Item as HierarchicalItem;
+
+        var foundItem = FindItemRecursive(Data, item.Id);
+        if (foundItem != null)
+        {
+            foundItem.FirstName = item.FirstName;
+            foundItem.HireDate = item.HireDate;
+        }
+    }
+
+    private HierarchicalItem FindItemRecursive(List<HierarchicalItem> items, int id)
+    {
+        foreach (var item in items)
+        {
+            if (item.Id.Equals(id))
+            {
+                return item;
+            }
+
+            if (item.Items?.Count > 0)
+            {
+                var childItem = FindItemRecursive(item.Items, id);
+
+                if (childItem != null)
+                {
+                    return childItem;
+                }
+            }
+        }
+
+        return null;
+    }
+
+    private void DeleteItem(TreeListCommandEventArgs args)
+    {
+        var item = args.Item as HierarchicalItem;
+
+        RemoveChildRecursive(Data, item);
+    }
+
+    private void RemoveChildRecursive(List<HierarchicalItem> items, HierarchicalItem item)
+    {
+        for (int i = 0; i < items.Count(); i++)
+        {
+            if (item.Equals(items[i]))
+            {
+                items.Remove(item);
+
+                return;
+            }
+            else if (items[i].Items?.Count > 0)
+            {
+                RemoveChildRecursive(items[i].Items, item);
+
+                if (items[i].Items.Count == 0)
+                {
+                    items[i].HasChildren = false;
+                }
+            }
+        }
+    }
+
+    private void CreateItem(TreeListCommandEventArgs args)
+    {
+        var argsItem = args.Item as HierarchicalItem;
+
+        argsItem.Id = LastId++;
+
+        if (args.ParentItem != null)
+        {
+            var parent = (HierarchicalItem)args.ParentItem;
+
+            parent.HasChildren = true;
+            if (parent.Items == null)
+            {
+                parent.Items = new List<HierarchicalItem>();
+            }
+
+            parent.Items.Insert(0, argsItem);
+        }
+        else
+        {
+            Data.Insert(0, argsItem);
+        }
+    }
+
+    private void ResetUserState()
+    {
+        LocalStorage.RemoveItem("treeListEditingState");
+        TreeList?.SetStateAsync(null);
+    }
+}

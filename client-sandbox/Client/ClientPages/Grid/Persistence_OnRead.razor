@@ -1,0 +1,60 @@
+@page "/grid/persistance/onread"
+
+@using Telerik.DataSource.Extensions
+
+@inject ProductService ProductService
+
+@inject LocalStorage LocalStorage
+
+<div class="example-wrapper">
+    <button @onclick="@ResetState"> Reset State </button>
+</div>
+<TelerikGrid @ref="@Grid"
+             TItem="Product"
+             Pageable="true"
+             PageSize="10"
+             OnRead="@ReadItems"
+             OnStateInit="@((GridStateEventArgs<Product> args) => OnStateInit(args))"
+             OnStateChanged="@((GridStateEventArgs<Product> args) => OnStateChanged(args))">
+    <GridColumns>
+        <GridColumn Field=@nameof(Product.ProductName) Title="Product Name" Width="150px" />
+        <GridColumn Field=@nameof(Product.UnitPrice) Title="Unit Price" />
+        <GridColumn Field=@nameof(Product.UnitsInStock) Title="Units in stock" />
+        <GridColumn Field=@nameof(Product.CreatedAt) Title="Date created" />
+        <GridColumn Field=@nameof(Product.Discontinued) Title="Discontinued" />
+    </GridColumns>
+</TelerikGrid>
+
+@code {
+    public TelerikGrid<Product> Grid { get; set; }
+    public List<Product> SourceData { get; set; }
+
+    async Task OnStateInit(GridStateEventArgs<Product> args)
+    {
+        args.GridState = await LocalStorage.GetItem<GridState<Product>>("gridStateOnRead");
+    }
+
+    async void OnStateChanged(GridStateEventArgs<Product> args)
+    {
+        await LocalStorage.SetItem("gridStateOnRead", args.GridState);
+    }
+
+    protected async Task ReadItems(GridReadEventArgs args)
+    {
+        if (SourceData == null)
+        {
+            SourceData = (await ProductService.GetProductsAsync(40, true)).ToList();
+        }
+
+        var datasourceResult = SourceData.ToDataSourceResult(args.Request);
+
+        args.Data = datasourceResult.Data;
+        args.Total = datasourceResult.Total;
+    }
+
+    private void ResetState()
+    {
+        Grid?.SetStateAsync(null);
+        LocalStorage.RemoveItem("gridStateOnRead");
+    }
+}

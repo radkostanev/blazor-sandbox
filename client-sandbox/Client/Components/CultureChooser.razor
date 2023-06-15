@@ -1,0 +1,14 @@
+@using  Microsoft.JSInterop
+@using  System.Globalization
+
+@namespace client_sandbox.Client.Components
+
+<div>
+    <strong>Culture:</strong>
+    <select @bind="Culture">
+        @foreach (var culture in SupportedCultures)
+        {
+            <option value="@culture">@culture.Name</option>
+        }
+    </select>
+</div>

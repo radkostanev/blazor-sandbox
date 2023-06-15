@@ -1,0 +1,10 @@
+{
+  "version": "1.0",
+  "libraries": [
+    {
+      "provider": "unpkg",
+      "library": "@progress/kendo-theme-default@dev",
+      "destination": "wwwroot/css/themes/"
+    }
+  ]
+}

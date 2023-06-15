@@ -1,0 +1,120 @@
+@page "/grid/persistance/column-virtualization"
+
+@using Telerik.DataSource;
+
+@inject ProductService ProductService
+
+@inject LocalStorage LocalStorage
+
+<div class="example-wrapper">
+    <button @onclick="@SetState"> Set State </button>
+    <button @onclick="@ResetState"> Reset State </button>
+</div>
+
+<TelerikGrid @ref="@Grid"
+             Data="@GridData"
+             Pageable="true"
+             PageSize="5"
+             Sortable="true"
+             Height="400px"
+             Width="900px"
+             Resizable="true"
+             Reorderable="true"
+             OnStateInit="@((GridStateEventArgs<Product> args) => OnStateInit(args))"
+             OnStateChanged="@((GridStateEventArgs<Product> args) => OnStateChanged(args))">
+    <GridColumns>
+        <GridColumn Field=@nameof(Product.ProductName) Title="Product Name" Width="150px" />
+        <GridColumn Field=@nameof(Product.UnitPrice) Title="Unit Price" Width="150px" />
+        <GridColumn Field=@nameof(Product.UnitsInStock) Title="Units in stock" Width="150px" />
+        <GridColumn Field=@nameof(Product.CreatedAt) Title="Date created" Width="150px" />
+        <GridColumn Field=@nameof(Product.Discontinued) Title="Discontinued" Width="150px" />
+        <GridColumn Field=@nameof(Product.QuantityPerUnit) Title="Quantity per unit" Width="150px" />
+        <GridColumn Field=@nameof(Product.Supplier) Width="150px" />
+        <GridColumn Field=@nameof(Product.SupplierId) Width="150px" />
+        <GridColumn Field=@nameof(Product.UnitsOnOrder) Width="150px" />
+    </GridColumns>
+</TelerikGrid>
+
+@code {
+    public TelerikGrid<Product> Grid { get; set; }
+    public List<Product> GridData { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        GridData = (await ProductService.GetProductsAsync(40, true)).ToList();
+    }
+
+    async Task OnStateInit(GridStateEventArgs<Product> args)
+    {
+        args.GridState = await LocalStorage.GetItem<GridState<Product>>("gridColumnVirtualizationState");
+    }
+
+    void OnStateChanged(GridStateEventArgs<Product> args)
+    {
+        LocalStorage.SetItem("gridColumnVirtualizationState", Grid?.GetState());
+    }
+
+    private void SetState()
+    {
+        GridState<Product> state = new GridState<Product>()
+        {
+            Page = 2,
+            ColumnStates = new List<GridColumnState>()
+            {
+                new GridColumnState()
+                {
+                    Index = 3,
+                    Width = "150px"
+                },
+                new GridColumnState()
+                {
+                    Index = 1,
+                    Width = "120px"
+                },
+                new GridColumnState()
+                {
+                    Index = 2,
+                    Width = "60px"
+                },
+                new GridColumnState()
+                {
+                    Index = 4,
+                    Width = "150px"
+                },
+                new GridColumnState()
+                {
+                    Index = 0,
+                    Width = "120px"
+                },
+                new GridColumnState()
+                {
+                    Index = 7,
+                    Width = "160px"
+                },
+                new GridColumnState()
+                {
+                    Index = 6,
+                    Width = "120px"
+                },
+                new GridColumnState()
+                {
+                    Index = 8,
+                    Width = "120px"
+                },
+                new GridColumnState()
+                {
+                    Index = 5,
+                    Width = "120px"
+                }
+            }
+        };
+
+        Grid?.SetStateAsync(state);
+    }
+
+    private void ResetState()
+    {
+        Grid?.SetStateAsync(null);
+        LocalStorage.RemoveItem("gridColumnVirtualizationState");
+    }
+}

@@ -1,0 +1,173 @@
+@page "/grid/persistance/editing"
+
+@using System.Collections.ObjectModel;
+@using System.Linq;
+
+@inject LocalStorage LocalStorage
+@inject ProductService ProductService
+<div class="example-wrapper">
+    <button @onclick="@ResetState"> Reset State </button>
+</div>
+<h4>Editing Inline</h4>
+
+<TelerikGrid @ref="@InlineGrid"
+             Data="@GridData"
+             Pageable="true"
+             PageSize="10"
+             Resizable="true"
+             OnStateInit="@((GridStateEventArgs<ProductEquatable> args) => OnStateInitInline(args))"
+             OnStateChanged="@((GridStateEventArgs<ProductEquatable> args) => OnStateChangedInline(args))"
+             OnUpdate=@UpdateItem
+             OnDelete=@DeleteItem
+             OnCreate=@CreateItem
+             EditMode="@GridEditMode.Inline">
+    <GridToolBarTemplate>
+        <GridCommandButton Command="Add" Icon="@FontIcon.Plus">Add Product</GridCommandButton>
+    </GridToolBarTemplate>
+    <GridColumns>
+        <GridColumn Field=@nameof(ProductEquatable.ProductName) Title="Product Name" Width="150px" />
+        <GridColumn Field=@nameof(ProductEquatable.UnitPrice) Title="Unit Price" />
+        <GridColumn Field=@nameof(ProductEquatable.UnitsInStock) Title="Units in stock" />
+        <GridColumn Field=@nameof(ProductEquatable.CreatedAt) Title="Date created" />
+        <GridColumn Field=@nameof(ProductEquatable.Discontinued) Title="Discontinued" />
+        <GridCommandColumn>
+            <GridCommandButton Command="Edit" Icon="@FontIcon.Pencil">Edit</GridCommandButton>
+            <GridCommandButton Command="Delete" Icon="@FontIcon.Trash">Delete</GridCommandButton>
+            <GridCommandButton Command="Save" Icon="@FontIcon.Save" ShowInEdit="true">Update</GridCommandButton>
+            <GridCommandButton Command="Cancel" Icon="@FontIcon.X" ShowInEdit="true">Cancel</GridCommandButton>
+        </GridCommandColumn>
+    </GridColumns>
+</TelerikGrid>
+
+<h4>Editing Incell</h4>
+
+<TelerikGrid @ref="@IncellGrid"
+             Data="@GridData"
+             Pageable="true"
+             PageSize="10"
+             OnStateInit="@((GridStateEventArgs<ProductEquatable> args) => OnStateInitIncell(args))"
+             OnStateChanged="@((GridStateEventArgs<ProductEquatable> args) => OnStateChangedIncell(args))"
+             OnUpdate=@UpdateItem
+             OnDelete=@DeleteItem
+             OnCreate=@CreateItem
+             EditMode="@GridEditMode.Incell">
+    <GridToolBarTemplate>
+        <GridCommandButton Command="Add" Icon="@FontIcon.Plus">Add Product</GridCommandButton>
+    </GridToolBarTemplate>
+    <GridColumns>
+        <GridColumn Field=@nameof(ProductEquatable.ProductName) Title="Product Name" Width="150px" />
+        <GridColumn Field=@nameof(ProductEquatable.UnitPrice) Title="Unit Price" />
+        <GridColumn Field=@nameof(ProductEquatable.UnitsInStock) Title="Units in stock" />
+        <GridColumn Field=@nameof(ProductEquatable.CreatedAt) Title="Date created" />
+        <GridColumn Field=@nameof(ProductEquatable.Discontinued) Title="Discontinued" />
+    </GridColumns>
+</TelerikGrid>
+
+<h4>Editing Popup</h4>
+
+<TelerikGrid @ref="@PopupGrid"
+             Data="@GridData"
+             Pageable="true"
+             PageSize="10"
+             OnStateInit="@((GridStateEventArgs<ProductEquatable> args) => OnStateInitPopup(args))"
+             OnStateChanged="@((GridStateEventArgs<ProductEquatable> args) => OnStateChangedPopup(args))"
+             OnUpdate=@UpdateItem
+             OnDelete=@DeleteItem
+             OnCreate=@CreateItem
+             EditMode="@GridEditMode.Popup">
+    <GridToolBarTemplate>
+        <GridCommandButton Command="Add" Icon="@FontIcon.Plus">Add Product</GridCommandButton>
+    </GridToolBarTemplate>
+    <GridColumns>
+        <GridColumn Field=@nameof(ProductEquatable.ProductName) Title="Product Name" Width="150px" />
+        <GridColumn Field=@nameof(ProductEquatable.UnitPrice) Title="Unit Price" />
+        <GridColumn Field=@nameof(ProductEquatable.UnitsInStock) Title="Units in stock" />
+        <GridColumn Field=@nameof(ProductEquatable.CreatedAt) Title="Date created" />
+        <GridColumn Field=@nameof(ProductEquatable.Discontinued) Title="Discontinued" />
+        <GridCommandColumn>
+            <GridCommandButton Command="Edit" Icon="@FontIcon.Pencil">Edit</GridCommandButton>
+            <GridCommandButton Command="Delete" Icon="@FontIcon.Trash">Delete</GridCommandButton>
+            <GridCommandButton Command="Save" Icon="@FontIcon.Save" ShowInEdit="true">Update</GridCommandButton>
+            <GridCommandButton Command="Cancel" Icon="@FontIcon.X" ShowInEdit="true">Cancel</GridCommandButton>
+        </GridCommandColumn>
+    </GridColumns>
+</TelerikGrid>
+
+@code {
+    public TelerikGrid<ProductEquatable> InlineGrid { get; set; }
+    public TelerikGrid<ProductEquatable> IncellGrid { get; set; }
+    public TelerikGrid<ProductEquatable> PopupGrid { get; set; }
+    public ObservableCollection<ProductEquatable> GridData { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var eqProducts = await ProductService.GetProductEquatableAsync(100, true);
+        GridData = new ObservableCollection<ProductEquatable>(eqProducts);
+    }
+
+    async Task OnStateInitInline(GridStateEventArgs<ProductEquatable> args)
+    {
+        args.GridState = await LocalStorage.GetItem<GridState<ProductEquatable>>("gridStateInline");
+    }
+
+    async Task OnStateInitIncell(GridStateEventArgs<ProductEquatable> args)
+    {
+        args.GridState = await LocalStorage.GetItem<GridState<ProductEquatable>>("gridStateIncell");
+    }
+
+    async Task OnStateInitPopup(GridStateEventArgs<ProductEquatable> args)
+    {
+        args.GridState = await LocalStorage.GetItem<GridState<ProductEquatable>>("gridStatePopup");
+    }
+
+    async void OnStateChangedInline(GridStateEventArgs<ProductEquatable> args)
+    {
+        await LocalStorage.SetItem("gridStateInline", args.GridState);
+    }
+
+    async void OnStateChangedIncell(GridStateEventArgs<ProductEquatable> args)
+    {
+        await LocalStorage.SetItem("gridStateIncell", args.GridState);
+    }
+
+    async void OnStateChangedPopup(GridStateEventArgs<ProductEquatable> args)
+    {
+        await LocalStorage.SetItem("gridStatePopup", args.GridState);
+    }
+
+    private void CreateItem(GridCommandEventArgs args)
+    {
+        var argsItem = args.Item as ProductEquatable;
+
+        argsItem.ProductId = GridData.Count + 1;
+
+        GridData.Insert(0, argsItem);
+    }
+
+    private void DeleteItem(GridCommandEventArgs args)
+    {
+        var argsItem = args.Item as ProductEquatable;
+
+        GridData.Remove(argsItem);
+    }
+
+    private void UpdateItem(GridCommandEventArgs args)
+    {
+        var argsItem = args.Item as ProductEquatable;
+        var item = GridData.FirstOrDefault(i => i.ProductId == argsItem.ProductId);
+        if (item != null)
+        {
+            var index = GridData.IndexOf(item);
+            GridData[index] = argsItem;
+        }
+    }
+    private void ResetState()
+    {
+        InlineGrid?.SetStateAsync(null);
+        IncellGrid?.SetStateAsync(null);
+        PopupGrid?.SetStateAsync(null);
+        LocalStorage.RemoveItem("gridStateInline");
+        LocalStorage.RemoveItem("gridStateIncell");
+        LocalStorage.RemoveItem("gridStatePopup");
+    }
+}

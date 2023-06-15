@@ -1,0 +1,92 @@
+@page "/"
+
+@using System.Text.RegularExpressions
+
+@inject HttpClient Http
+
+<TelerikToolBar Class="wide-toolbar">
+    <ToolBarTemplateItem>
+
+        <TelerikTextBox @ref="@TextBoxRef"
+                        @bind-Value="@FilterName"
+                        Placeholder="Search by component name..."
+                        Width="300px">
+        </TelerikTextBox>
+        <TelerikFontIcon Class="custom-position" Icon="FontIcon.Search" />
+
+    </ToolBarTemplateItem>
+</TelerikToolBar>
+
+@foreach (var component in urls)
+{
+    if (component.Name.ToLower().Contains(FilterName))
+    {
+        <div class="k-card margin">
+            <div class="k-card-header">
+                @component.Name
+            </div>
+            <div class="k-card-body">
+                @foreach (var url in GetUrls(component))
+                {
+                    <NavLink href="@url">@GetLinkText(url)</NavLink>
+                    <br />
+                }
+            </div>
+        </div>
+    }
+}
+
+@code {
+    private string FilterName { get; set; } = String.Empty;
+
+    private TelerikTextBox TextBoxRef;
+
+    List<ComponentDirectory> urls = new List<ComponentDirectory>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        urls = await Http.GetFromJsonAsync<List<ComponentDirectory>>("api/urls");
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await Task.Delay(30);
+
+        await TextBoxRef.FocusAsync();
+    }
+
+    private string GetLinkText(string url)
+    {
+        Regex rgx = new Regex(@"([a-z]*\/)");
+
+        return rgx.Replace(url, "", 1);
+    }
+
+    private List<string> GetUrls(ComponentDirectory directory)
+    {
+        List<string> result = new List<string>();
+
+        foreach (var subDirectory in directory.Directories)
+        {
+            result.AddRange(GetUrls(subDirectory));
+        }
+
+        result.AddRange(directory.Urls);
+
+        return result;
+    }
+}
+<style>
+    .margin {
+        margin: 1em;
+    }
+
+    .wide-toolbar {
+        width: 100%;
+    }
+
+    .custom-position {
+        margin-top: 6px;
+        margin-left: -20px;
+    }
+</style>

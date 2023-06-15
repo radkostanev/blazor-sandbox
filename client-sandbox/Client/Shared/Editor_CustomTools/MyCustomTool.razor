@@ -1,0 +1,37 @@
+@using Telerik.Blazor.Components
+@using System.Text.RegularExpressions
+
+@namespace Playground.Shared
+
+<TelerikComboBox Data="@Items" @bind-Value="@Value" OnChange="@OnChange" AllowCustom="true">
+    <ItemTemplate>
+        <span style="background-color: @context">@context</span>
+    </ItemTemplate>
+</TelerikComboBox>
+
+@code {
+    [CascadingParameter]
+    public TelerikEditor Editor { get; set; }
+
+    [Parameter]
+    public EventCallback<string> OnExecute { get; set; }
+
+    public List<string> Items { get; set; } = new List<string>() { "#ff00ff", "#77a1b5", "#fee11a", "#273f8a", "#badd99" };
+
+    public string Value { get; set; }
+
+    void OnChange(object value)
+    {
+        var val = value?.ToString();
+        Regex regex = new Regex("^#(([0-9a-fA-F]{2}){3}|([0-9a-fA-F]){3})$");
+
+        if (!string.IsNullOrEmpty(val) && regex.IsMatch(val))
+        {
+            OnExecute.InvokeAsync(val) ;
+        }
+        else
+        {
+            Value = val;
+        }
+    }
+}

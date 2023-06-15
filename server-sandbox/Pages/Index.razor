@@ -1,0 +1,100 @@
+@page "/"
+
+@using Microsoft.AspNetCore.Hosting
+@using Playground.Shared.Services
+@using server_sandbox.Services
+@using System.Text.RegularExpressions
+
+@inject IWebHostEnvironment Environment
+@inject BaseAppUrlsService BaseAppUrlsService
+@inject UrlsService UrlsService
+
+<TelerikToolBar Class="wide-toolbar" Adaptive="false">
+    <ToolBarTemplateItem>
+
+        <TelerikTextBox @ref="@TextBoxRef"
+                        @bind-Value="@FilterName"
+                        Placeholder="Search by component name..."
+                        Width="300px">
+        </TelerikTextBox>
+        <TelerikFontIcon Class="custom-position" Icon="@Telerik.FontIcons.FontIcon.Search" />
+
+    </ToolBarTemplateItem>
+</TelerikToolBar>
+
+@foreach (var component in Directories)
+{
+    if (component.Name.ToLower().Contains(FilterName))
+    {
+        <div class="k-card margin">
+            <div class="k-card-header">
+                @component.Name
+            </div>
+            <div class="k-card-body">
+                @foreach (var url in GetUrls(component))
+                {
+
+                    <NavLink href="@url">@GetLinkText(url)</NavLink>
+                    <br />
+                }
+            </div>
+        </div>
+    }
+}
+
+@code {
+    private string FilterName { get; set; } = String.Empty;
+
+    private TelerikTextBox TextBoxRef;
+
+    public List<ComponentDirectory> Directories { get; set; } = new List<ComponentDirectory>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Directories = UrlsService.GetComponentDirectories();
+
+        await base.OnInitializedAsync();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await Task.Delay(30);
+
+        await TextBoxRef.FocusAsync();
+    }
+
+    private string GetLinkText(string url)
+    {
+        Regex rgx = new Regex(@"([a-z]*\/)");
+
+        return rgx.Replace(url, "", 1);
+    }
+
+    private List<string> GetUrls(ComponentDirectory directory)
+    {
+        List<string> result = new List<string>();
+
+        foreach (var subDirectory in directory.Directories)
+        {
+            result.AddRange(GetUrls(subDirectory));
+        }
+
+        result.AddRange(directory.Urls);
+
+        return result;
+    }
+}
+<style>
+    .margin {
+        margin: 1em;
+    }
+
+    .wide-toolbar {
+        width: 100%;
+    }
+
+    .custom-position {
+        margin-top: 6px;
+        margin-left: -20px;
+    }
+</style>

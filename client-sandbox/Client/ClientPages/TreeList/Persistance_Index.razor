@@ -1,0 +1,118 @@
+@page "/treelist/persistance/index"
+@using Telerik.DataSource
+@using Playground.Shared.Models.TreeList
+
+@inject LocalStorage LocalStorage
+@inject TreeListService TreeListService
+
+<div class="example-wrapper">
+    <button @onclick="@SetState"> Set State </button>
+    <button @onclick="@ResetState"> Reset State </button>
+    <button @onclick="@ResetUserState"> Reset User Stored State </button>
+</div>
+
+<TelerikTreeList @ref="@TreeList"
+                 Data="@Data"
+                 IdField="Id"
+                 ParentIdField="ParentId"
+                 Pageable="true"
+                 Sortable="true"
+                 Height="400px"
+                 Width="900px"
+                 Resizable="true"
+                 Reorderable="true"
+                 FilterMode="@TreeListFilterMode.FilterMenu"
+                 OnStateInit="@((TreeListStateEventArgs<FlatItem> args) => OnStateInit(args))"
+                 OnStateChanged="@((TreeListStateEventArgs<FlatItem> args) => OnStateChanged(args))">
+    <TreeListColumns>
+        <TreeListColumn Field="StringProp" Expandable="true" Width="300px"></TreeListColumn>
+        <TreeListColumn Field="DateTimeProp"></TreeListColumn>
+        <TreeListColumn Field="EnumProp"></TreeListColumn>
+        <TreeListColumn Field="IntProp"></TreeListColumn>
+        <TreeListColumn Field="ParentId"></TreeListColumn>
+    </TreeListColumns>
+</TelerikTreeList>
+
+@code {
+    public TelerikTreeList<FlatItem> TreeList { get; set; }
+    public List<FlatItem> Data { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        Data = await TreeListService.GetFlatItemsAsync();
+    }
+
+    async Task OnStateInit(TreeListStateEventArgs<FlatItem> args)
+    {
+        args.TreeListState = await LocalStorage.GetItem<TreeListState<FlatItem>>("treeListIndexState");
+    }
+
+    void OnStateChanged(TreeListStateEventArgs<FlatItem> args)
+    {
+        var state = args.TreeListState;
+
+        // Skip saving Expanded items to reduce state size in local storage.
+        state.ExpandedItems = null;
+
+        LocalStorage.SetItem("treeListIndexState", state);
+    }
+
+    private void SetState()
+    {
+        TreeListState<FlatItem> state = new TreeListState<FlatItem>()
+        {
+            FilterDescriptors = new List<IFilterDescriptor>()
+            {
+                new FilterDescriptor() { Member="StringProp", MemberType=typeof(string), Value = "2", Operator = FilterOperator.Contains }
+            },
+            SortDescriptors = new List<SortDescriptor>()
+        {
+                new SortDescriptor() { Member = "StringProp", SortDirection = ListSortDirection.Descending }
+            },
+            Page = 2,
+            ColumnStates = new List<TreeListColumnState>()
+        {
+                new TreeListColumnState()
+                {
+                    Index = 3,
+                    Width = "150px"
+                },
+                new TreeListColumnState()
+                {
+                    Index = 1,
+                    Width = "120px"
+                },
+                new TreeListColumnState()
+                {
+                    Index = 2,
+                    Width = "60px"
+                },
+                new TreeListColumnState()
+                {
+                    Index = 4,
+                    Width = "150px"
+                },
+                new TreeListColumnState()
+                {
+                    Index = 0,
+                    Width = "120px"
+                }
+            }
+        };
+        TreeList?.SetStateAsync(state);
+        LocalStorage.SetItem("treeListIndexState", state);
+    }
+
+    private void ResetState()
+    {
+        TreeList?.SetStateAsync(null);
+    }
+
+    private void ResetUserState()
+    {
+        LocalStorage.RemoveItem("treeListIndexState");
+        TreeList?.SetStateAsync(null);
+    }
+}
+

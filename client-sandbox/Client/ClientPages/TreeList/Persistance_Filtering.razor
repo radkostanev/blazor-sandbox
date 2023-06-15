@@ -1,0 +1,96 @@
+@page "/treelist/persistance/filtering"
+@using Playground.Shared.Models.TreeList
+
+@inject LocalStorage LocalStorage
+@inject TreeListService TreeListService
+
+<div class="example-wrapper">
+    <button @onclick="@ResetUserState"> Reset User Stored State </button>
+</div>
+
+<h4>FilterRow</h4>
+<TelerikTreeList @ref="@TreeListFilterRow"
+                 Data="@Data"
+                 IdField="Id"
+                 ParentIdField="ParentId"
+                 Pageable="true"
+                 FilterMode="@TreeListFilterMode.FilterRow"
+                 OnStateInit="@((TreeListStateEventArgs<FlatItem> args) => OnStateInitRow(args))"
+                 OnStateChanged="@((TreeListStateEventArgs<FlatItem> args) => OnStateChangedRow(args))">
+    <TreeListColumns>
+        <TreeListColumn Field="StringProp" Expandable="true" Width="300px"></TreeListColumn>
+        <TreeListColumn Field="DateTimeProp"></TreeListColumn>
+        <TreeListColumn Field="EnumProp"></TreeListColumn>
+        <TreeListColumn Field="IntProp"></TreeListColumn>
+        <TreeListColumn Field="ParentId"></TreeListColumn>
+    </TreeListColumns>
+</TelerikTreeList>
+
+<h4>FilterMenu</h4>
+<TelerikTreeList @ref="@TreeListFilterMenu"
+                 Data="@Data"
+                 IdField="Id"
+                 ParentIdField="ParentId"
+                 Pageable="true"
+                 FilterMode="@TreeListFilterMode.FilterMenu"
+                 OnStateInit="@((TreeListStateEventArgs<FlatItem> args) => OnStateInitMenu(args))"
+                 OnStateChanged="@((TreeListStateEventArgs<FlatItem> args) => OnStateChangedMenu(args))">
+    <TreeListColumns>
+        <TreeListColumn Field="StringProp" Expandable="true" Width="300px"></TreeListColumn>
+        <TreeListColumn Field="DateTimeProp"></TreeListColumn>
+        <TreeListColumn Field="EnumProp"></TreeListColumn>
+        <TreeListColumn Field="IntProp"></TreeListColumn>
+        <TreeListColumn Field="ParentId"></TreeListColumn>
+    </TreeListColumns>
+</TelerikTreeList>
+
+@code {
+    public TelerikTreeList<FlatItem> TreeListFilterRow { get; set; }
+    public TelerikTreeList<FlatItem> TreeListFilterMenu { get; set; }
+    public List<FlatItem> Data { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Data = await TreeListService.GetFlatItemsAsync();
+    }
+
+    async Task OnStateInitRow(TreeListStateEventArgs<FlatItem> args)
+    {
+        args.TreeListState = await LocalStorage.GetItem<TreeListState<FlatItem>>("treeListFilteringRow");
+    }
+
+    async Task OnStateInitMenu(TreeListStateEventArgs<FlatItem> args)
+    {
+        args.TreeListState = await LocalStorage.GetItem<TreeListState<FlatItem>>("treeListFilteringMenu");
+    }
+
+    void OnStateChangedRow(TreeListStateEventArgs<FlatItem> args)
+    {
+        var state = args.TreeListState;
+
+        // Skip saving Expanded items to reduce state size in local storage.
+        state.ExpandedItems = null;
+
+        LocalStorage.SetItem("treeListFilteringRow", state);
+    }
+
+    void OnStateChangedMenu(TreeListStateEventArgs<FlatItem> args)
+    {
+        var state = TreeListFilterMenu?.GetState();
+
+        // Skip saving Expanded items to reduce state size in local storage.
+        state.ExpandedItems = null;
+
+        LocalStorage.SetItem("treeListFilteringMenu", state);
+    }
+
+    private void ResetUserState()
+    {
+        LocalStorage.RemoveItem("treeListFilteringRow");
+        LocalStorage.RemoveItem("treeListFilteringMenu");
+
+        TreeListFilterRow?.SetStateAsync(null);
+        TreeListFilterMenu?.SetStateAsync(null);
+    }
+}
+

@@ -1,0 +1,80 @@
+@page "/grid/manual-operations-httpclient"
+
+@using Telerik.DataSource
+@using System.Text.Json
+
+@inject HttpClient HttpClient
+@inject ProductService ProductService
+
+<TelerikGrid TItem="Product"
+             Sortable="true"
+             Pageable="true"
+             Groupable="true"
+             Height="460px"
+             PageSize="10"
+             FilterMode="@GridFilterMode.FilterRow"
+             OnRead=@ReadItems>
+    <GridColumns>
+        <GridColumn Field="@nameof(Product.ProductId)" />
+        <GridColumn Field="@nameof(Product.ProductName)" />
+        <GridColumn Field="@nameof(Product.UnitPrice)" />
+        <GridColumn Field="@nameof(Product.CreatedAt)" />
+        <GridColumn Field="@nameof(Product.Discontinued)" />
+    </GridColumns>
+</TelerikGrid>
+
+@code {
+    protected async Task ReadItems(GridReadEventArgs args)
+    {
+        var response = await HttpClient.SendAsync(new HttpRequestMessage()
+        {
+            Method = HttpMethod.Post,
+            RequestUri = new Uri("product", UriKind.RelativeOrAbsolute),
+            Content = JsonContent.Create(JsonSerializer.Serialize<DataSourceRequest>(args.Request))
+        });
+
+        var dataSourceResult = await response.Content.ReadFromJsonAsync<ProductsDataSourceResult>();
+
+        if (dataSourceResult.Data.Count() > 0)
+        {
+            args.Data = dataSourceResult.Data;   
+        }
+        else
+        {
+            var groups = dataSourceResult.GroupData.OfType<AggregateFunctionsGroup>();
+            foreach (var group in groups)
+            {
+                DeserializeGroupItems(group);
+            }
+
+            args.Data = groups;
+        }
+        args.Total = dataSourceResult.Total;
+    }
+
+    private void DeserializeGroupItems(AggregateFunctionsGroup group)
+    {
+        var serializerOptions = new JsonSerializerOptions() { PropertyNameCaseInsensitive = true };
+
+        group.Key = group.Key.ToString();
+
+        if (group.HasSubgroups)
+        {
+            IEnumerable<AggregateFunctionsGroup> subGroups = group.Items
+                .OfType<JsonElement>()
+                .Select(i => (JsonSerializer.Deserialize<AggregateFunctionsGroup>(i.GetRawText(), serializerOptions)))
+                .ToList();
+                
+            foreach (var subGroup in subGroups)
+            {
+                DeserializeGroupItems(subGroup);
+            }
+
+            group.Items = subGroups;
+        }
+        else
+        {
+            group.Items = group.Items.OfType<JsonElement>().Select(i => (JsonSerializer.Deserialize<Product>(i.GetRawText(), serializerOptions)));
+        }   
+    }
+}

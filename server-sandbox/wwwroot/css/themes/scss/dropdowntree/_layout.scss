@@ -1,0 +1,27 @@
+@mixin kendo-dropdown-tree--layout-base() {
+
+    // Dropdown tree
+    .k-dropdown-tree {}
+
+    // Dropdowntree popup
+    .k-popup-dropdowntree, // remove legacy class once updated in components
+    .k-dropdowntree-popup,
+    .k-multiselecttree-popup {
+        padding: 0;
+
+        .k-check-all {
+            padding: $kendo-dropdowntree-popup-padding-y $kendo-dropdowntree-popup-padding-x 0;
+        }
+
+        .k-treeview {
+            padding-block: $kendo-dropdowntree-popup-padding-y;
+            padding-inline: $kendo-dropdowntree-popup-padding-x;
+        }
+    }
+
+}
+
+
+@mixin kendo-dropdown-tree--layout() {
+    @include kendo-dropdown-tree--layout-base();
+}

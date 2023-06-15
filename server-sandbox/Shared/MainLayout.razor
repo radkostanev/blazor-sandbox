@@ -1,0 +1,32 @@
+@inherits LayoutComponentBase
+
+<CascadingValue Value="this" IsFixed="true">
+    <TelerikRootComponent IconType="@IconType.Svg" EnableRtl="@IsRtl">
+        @Body
+    </TelerikRootComponent>
+</CascadingValue>
+
+@code {
+    private bool IsRtl { get; set; } = false;
+
+    public void ToggleRtl()
+    {
+        IsRtl = !IsRtl;
+        StateHasChanged();
+    }
+
+    protected override Task OnInitializedAsync()
+    {
+        SetDefaultCulture();
+
+        return base.OnInitializedAsync();
+    }
+
+    private void SetDefaultCulture()
+    {
+        var culture = new CultureInfo("en-US");
+
+        CultureInfo.DefaultThreadCurrentCulture = culture;
+        CultureInfo.DefaultThreadCurrentUICulture = culture;
+    }
+}
