@@ -53,7 +53,7 @@
     }
 
 
-    //Scheduler navigation
+    // Scheduler navigation
     .k-scheduler-navigation {}
 
 
@@ -125,12 +125,14 @@
             );
             @include box-shadow( $kendo-scheduler-event-selected-shadow );
         }
-    }
-    .k-event-inverse {
-        color: k-contrast-legacy( $kendo-scheduler-event-text );
-    }
-    .k-event-ongoing {
-        @include box-shadow( $kendo-scheduler-event-ongoing-shadow );
+
+        &.k-event-inverse {
+            color: k-contrast-legacy( $kendo-scheduler-event-text );
+        }
+
+        &.k-event-ongoing {
+            @include box-shadow( $kendo-scheduler-event-ongoing-shadow );
+        }
     }
 
 
@@ -159,9 +161,7 @@
 
 
     // Workweek view
-    // sass-lint:disable class-name-format
-    .k-scheduler-workWeekview {}
-    // sass-lint:enable class-name-format
+    .k-scheduler-workWeekview {} // stylelint-disable-line
 
 
     // Week view

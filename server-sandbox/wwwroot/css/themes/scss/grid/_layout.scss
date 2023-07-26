@@ -524,7 +524,8 @@
     }
 
     .k-grid-filter-popup {
-        min-width: 200px;
+        min-width: $kendo-grid-column-menu-width;
+        max-width: $kendo-grid-column-menu-max-width;
     }
 
     // Standalone column menu
@@ -1047,6 +1048,7 @@
                 position: absolute;
                 background: none;
                 cursor: row-resize;
+                z-index: 2;
             }
         }
 
@@ -1095,17 +1097,18 @@
     }
 
     // Remove Grid scrollbar during built-in export
+    // stylelint-disable declaration-no-important
     .k-pdf-export-shadow {
         .k-grid {
             float: left;
-            width: auto !important; // sass-lint:disable-line no-important
+            width: auto !important;
         }
 
         // Remove all sizes and scrolling
         .k-grid,
         .k-grid-content,
         .k-grid-content-locked {
-            height: auto !important; // sass-lint:disable-line no-important
+            height: auto !important;
             overflow: visible;
         }
 
@@ -1113,21 +1116,23 @@
             & + .k-grid-header-wrap,
             & + .k-grid-content,
             & + .k-grid-footer-wrap {
-                width: auto !important; // sass-lint:disable-line no-important
+                width: auto !important;
             }
         }
 
         // Remove empty space reserved above .k-table-the scrollbar
         .k-grid-header,
         .k-grid[data-role="grid"] .k-grid-footer {
-            padding: 0 !important; // sass-lint:disable-line no-important
+            padding: 0 !important;
         }
     }
+    // stylelint-enable declaration-no-important
 
 
     // Filter menu
     .k-filter-menu-popup {
-        width: $kendo-grid-column-menu-width;
+        min-width: $kendo-grid-column-menu-width;
+        max-width: $kendo-grid-column-menu-max-width;
     }
     .k-filter-menu {
         box-sizing: border-box;
@@ -1171,7 +1176,8 @@
     .k-grid-filter-popup.k-popup {
 
         .k-filter-menu-container {
-            width: $kendo-grid-column-menu-width;
+            min-width: $kendo-grid-column-menu-width;
+            max-width: $kendo-grid-column-menu-max-width;
         }
     }
 
@@ -1202,19 +1208,17 @@
 
     // autofitting requires automatic table layout to measure sizes
     .k-autofitting {
-        // sass-lint:disable-block no-important
-
-        width: auto !important;
-        table-layout: auto !important;
+        width: auto !important; // stylelint-disable-line declaration-no-important
+        table-layout: auto !important; // stylelint-disable-line declaration-no-important
 
         .k-table-th,
         td,
         .k-table-td {
-            white-space: nowrap !important;
+            white-space: nowrap !important; // stylelint-disable-line declaration-no-important
         }
 
         .k-detail-row {
-            display: none !important;
+            display: none !important; // stylelint-disable-line declaration-no-important
         }
     }
 
@@ -1223,13 +1227,13 @@
     // Column menu
     .k-column-menu-popup,
     .k-grid-columnmenu-popup {
-        width: $kendo-grid-column-menu-width;
+        min-width: $kendo-grid-column-menu-width;
         box-sizing: border-box;
 
         &.k-popup {
             padding-block: $kendo-grid-column-menu-popup-padding-y;
             padding-inline: $kendo-grid-column-menu-popup-padding-x;
-            max-width: 100%;
+            max-width: $kendo-grid-column-menu-max-width;
         }
 
         .k-actions {
@@ -1349,6 +1353,18 @@
         font-weight: bold;
         text-transform: $kendo-grid-column-menu-group-header-text-transform;
         flex: 1 1 auto;
+    }
+
+    .k-rtl .k-grid-virtual .k-grid-content,
+    [dir="rtl"] .k-grid-virtual .k-grid-content,
+    .k-rtl.k-grid-virtual .k-grid-content,
+    [dir="rtl"].k-grid-virtual .k-grid-content {
+
+        .k-grid-table-wrap,
+        .k-grid-table,
+        > .k-height-container {
+            float: right;
+        }
     }
 
 }

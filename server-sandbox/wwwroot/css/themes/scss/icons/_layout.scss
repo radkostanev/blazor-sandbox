@@ -45,6 +45,10 @@ $ki-icon-size: $kendo-icon-size;
         right: 0;
         margin: 0 -.5em -.5em 0;
     }
+    .k-svg-icon.k-icon-modifier {
+        width: 1em;
+        height: 1em;
+    }
 
     .k-i-none::before {
         content: "";
@@ -52,21 +56,12 @@ $ki-icon-size: $kendo-icon-size;
     }
 
     .k-icon-action {
+        display: inline-flex;
         padding: $kendo-icon-padding;
+        line-height: 1;
+        align-items: center;
+        vertical-align: middle;
         cursor: pointer;
-    }
-
-    // RTL icons
-    .k-rtl,
-    [dir="rtl"] {
-        .k-i-indent-increase,
-        .k-i-indent-decrease,
-        .k-i-caret-alt-right,
-        .k-i-caret-alt-left,
-        .k-svg-i-caret-alt-right,
-        .k-svg-i-caret-alt-left {
-            transform: scaleX(-1);
-        }
     }
 
     .k-sprite {

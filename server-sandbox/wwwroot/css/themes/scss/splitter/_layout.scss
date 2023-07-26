@@ -56,6 +56,7 @@
         .k-collapse-prev,
         .k-collapse-next {
             cursor: pointer;
+            padding: $kendo-splitter-collapse-icon-padding-y $kendo-splitter-collapse-icon-padding-x;
         }
 
     }
@@ -166,25 +167,15 @@
         .k-pane-flex {
             &.k-hidden,
             &[hidden] {
-                // sass-lint:disable-block no-important
                 // hidden panes need to be zero-width to allow pane animation
-                flex: 0 1 0% !important;
-                overflow: hidden !important;
-                display: block !important;
+                flex: 0 1 0% !important; // stylelint-disable-line declaration-no-important
+                overflow: hidden !important; // stylelint-disable-line declaration-no-important
+                display: block !important; // stylelint-disable-line declaration-no-important
             }
         }
 
         &.k-splitter-horizontal {
             flex-direction: row;
-
-            &[dir="rtl"] {
-                > .k-splitbar {
-                    > .k-collapse-next,
-                    > .k-collapse-prev {
-                        transform: scaleX(-1);
-                    }
-                }
-            }
         }
         &.k-splitter-vertical {
             flex-direction: column;
