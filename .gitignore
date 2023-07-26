@@ -396,3 +396,6 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+/server-sandbox/Pages/Sandbox/First.razor
+/server-sandbox/Pages/Sandbox/Second.razor
+/server-sandbox/Pages/Sandbox/Third.razor
