@@ -131,7 +131,15 @@ namespace server_sandbox
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapDefaultControllerRoute();
+
                 endpoints.MapBlazorHub();
+
+                //endpoints.MapBlazorHub(options =>
+                //{
+                //    options.Transports = Microsoft.AspNetCore.Http.Connections.HttpTransportType.ServerSentEvents |
+                //Microsoft.AspNetCore.Http.Connections.HttpTransportType.LongPolling;
+                //});
+
                 endpoints.MapFallbackToPage("/_Host");
             });
         }
