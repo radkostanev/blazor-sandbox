@@ -3,7 +3,7 @@
     "name": "Default Blue",
     "product": "kendo",
     "base": "@progress/kendo-theme-default",
-    "version": "6.7.0-dev.0",
+    "version": "7.0.0-dev.0",
     "previewColors": [
         "#ffffff",
         "#f5f5f5",
