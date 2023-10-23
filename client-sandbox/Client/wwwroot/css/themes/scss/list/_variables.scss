@@ -28,7 +28,7 @@ $kendo-list-lg-header-padding-x: k-map-get( $kendo-spacing, 2 ) !default;
 /// The vertical padding of the List header, if no size is set.
 /// @group list
 $kendo-list-header-padding-y: null !default;
-$kendo-list-sm-header-padding-y: k-map-get( $kendo-spacing, 0.5 ) !default; // sass-lint:disable-line leading-zero
+$kendo-list-sm-header-padding-y: k-map-get( $kendo-spacing, 0.5 ) !default;
 $kendo-list-md-header-padding-y: k-map-get( $kendo-spacing, 1 ) !default;
 $kendo-list-lg-header-padding-y: k-map-get( $kendo-spacing, 1.5 ) !default;
 
@@ -52,7 +52,7 @@ $kendo-list-lg-header-line-height: null !default;
 
 /// The font weight of the List header.
 /// @group list
-$kendo-list-header-font-weight: null !default;
+$kendo-list-header-font-weight: $kendo-font-weight-bold !default;
 
 /// The horizontal padding of the List items, when no size is set.
 /// @group list
@@ -64,7 +64,7 @@ $kendo-list-lg-item-padding-x: k-map-get( $kendo-spacing, 2 ) !default;
 /// The vertical padding of the List items, when no size is set.
 /// @group list
 $kendo-list-item-padding-y: null !default;
-$kendo-list-sm-item-padding-y: k-map-get( $kendo-spacing, 0.5 ) !default; // sass-lint:disable-line leading-zero
+$kendo-list-sm-item-padding-y: k-map-get( $kendo-spacing, 0.5 ) !default;
 $kendo-list-md-item-padding-y: k-map-get( $kendo-spacing, 1 ) !default;
 $kendo-list-lg-item-padding-y: k-map-get( $kendo-spacing, 2 ) !default;
 
@@ -92,7 +92,7 @@ $kendo-list-lg-group-item-padding-x: k-map-get( $kendo-spacing, 2 ) !default;
 /// The vertical padding of the List group items, when no size is set.
 /// @group list
 $kendo-list-group-item-padding-y: null !default;
-$kendo-list-sm-group-item-padding-y: k-map-get( $kendo-spacing, 0.5 ) !default; // sass-lint:disable-line leading-zero
+$kendo-list-sm-group-item-padding-y: k-map-get( $kendo-spacing, 0.5 ) !default;
 $kendo-list-md-group-item-padding-y: k-map-get( $kendo-spacing, 1 ) !default;
 $kendo-list-lg-group-item-padding-y: k-map-get( $kendo-spacing, 1.5 ) !default;
 
@@ -116,7 +116,7 @@ $kendo-list-lg-group-item-line-height: null !default;
 
 /// The font weight of a List group item.
 /// @group list
-$kendo-list-group-item-font-weight: null !default;
+$kendo-list-group-item-font-weight: $kendo-font-weight-bold !default;
 
 
 /// The map with the sizes of the List.
@@ -195,7 +195,7 @@ $kendo-list-header-text: null !default;
 $kendo-list-header-border: inherit !default;
 /// The box shadow of the List header.
 /// @group list
-$kendo-list-header-shadow: 0 5px 10px 0 rgba(0, 0, 0, .06) !default;
+$kendo-list-header-shadow: k-elevation(2) !default;
 
 
 /// The background color of the List items.

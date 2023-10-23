@@ -8,6 +8,7 @@
         );
 
 
+        // TODO: do we even use this?
         // Header / footer
         .k-header {
             @include fill(
@@ -155,7 +156,7 @@
 
 
     // Multiview calendar
-    .k-calendar {
+    .k-calendar { // stylelint-disable-line
 
         $kendo-calendar-range-gap: 1px !default;
         $kendo-calendar-range-bg: rgba( $kendo-calendar-cell-selected-bg, .25 );

@@ -1,7 +1,7 @@
 {
   "name": "@progress/kendo-theme-default",
   "description": "SASS resources for the default Kendo UI theme",
-  "version": "6.4.0-dev.3",
+  "version": "7.0.0-dev.0",
   "author": "Progress",
   "license": "Apache-2.0",
   "keywords": [
@@ -37,6 +37,7 @@
   },
   "scripts": {
     "build": "sass-build",
+    "watch": "node ../../scripts/watch-theme",
     "sass": "sass-build",
     "sass:standalone": "sass-build -c sass-standalone.config.js",
     "docs": "node ../../scripts/sassdoc.js",
@@ -48,9 +49,9 @@
     "postpublish": "echo 'no postpublish for default theme'"
   },
   "dependencies": {
-    "@progress/kendo-font-icons": "1.5.0",
-    "@progress/kendo-theme-core": "6.4.0-dev.3",
-    "@progress/kendo-theme-utils": "6.4.0-dev.3"
+    "@progress/kendo-font-icons": "1.9.0",
+    "@progress/kendo-theme-core": "7.0.0-dev.0",
+    "@progress/kendo-theme-utils": "7.0.0-dev.0"
   },
-  "gitHead": "49c493e6e14a9c9f6e3e1c41d3219c7ff10f8527"
+  "gitHead": "228be168555ed9f71c328cefd10924e3fd037023"
 }

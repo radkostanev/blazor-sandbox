@@ -62,7 +62,7 @@ $kendo-grid-sm-cell-padding-y: $kendo-grid-sm-padding-y !default;
 $kendo-grid-sm-filter-cell-padding-x: k-map-get( $kendo-spacing, 1.5 ) !default;
 $kendo-grid-sm-filter-cell-padding-y: $kendo-grid-sm-filter-cell-padding-x !default;
 $kendo-grid-sm-edit-cell-padding-x: $kendo-grid-sm-cell-padding-x !default;
-$kendo-grid-sm-edit-cell-padding-y: k-map-get( $kendo-spacing, 0.5 ) !default; // sass-lint:disable-line leading-zero
+$kendo-grid-sm-edit-cell-padding-y: k-map-get( $kendo-spacing, 0.5 ) !default;
 $kendo-grid-sm-group-dropclue-height: calc( #{$kendo-chip-sm-calc-size} + #{$kendo-grid-group-drop-hint-size}) !default;
 $kendo-grid-sm-selection-aggregates-padding-x: $kendo-grid-sm-padding-y !default;
 $kendo-grid-sm-selection-aggregates-padding-y: $kendo-grid-sm-padding-y !default;
@@ -132,9 +132,6 @@ $kendo-grid-toolbar-border-width: $kendo-grid-border-width !default;
 
 $kendo-grid-cell-horizontal-border-width: $kendo-table-cell-horizontal-border-width !default;
 $kendo-grid-cell-vertical-border-width: $kendo-table-cell-vertical-border-width !default;
-
-$kendo-grid-cell-placeholder-line-width: 80% !default;
-
 
 /// Background color of the grid component
 /// @group grid
@@ -259,6 +256,7 @@ $kendo-grid-sticky-hover-bg: k-color-darken($kendo-grid-bg, 8%) !default;
 $kendo-grid-sticky-selected-hover-bg: k-color-shade($kendo-grid-sticky-selected-bg, .7) !default;
 
 $kendo-grid-column-menu-width: 230px !default;
+$kendo-grid-column-menu-max-width: 320px !default;
 
 $kendo-grid-filter-menu-check-all-border-bottom-width: 1px !default;
 
