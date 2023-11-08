@@ -1,10 +1,39 @@
-﻿<Router AppAssembly="@typeof(Program).Assembly">
-    <Found Context="routeData">
-        <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
-    </Found>
-    <NotFound>
-        <LayoutView Layout="@typeof(MainLayout)">
-            <p>Sorry, there's nothing at this address.</p>
-        </LayoutView>
-    </NotFound>
-</Router>
+﻿@namespace server_sandbox.Pages
+
+@inject IHostEnvironment Env
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>server_sandbox</title>
+    <base href="/" />
+    <link href="css/site.css" rel="stylesheet preload" as="style" type="text/css" />
+    <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet preload" as="style" type="text/css" />
+@*    <link rel="stylesheet" href="_content/Telerik.UI.for.Blazor/css/kendo-theme-default/all.css" />
+*@
+<link id="kendoCss" rel="stylesheet preload" as="style" type="text/css" href="css/themes/dist/all.css" />
+</head>
+<body>
+    <app>
+        <Routes @rendermode="InteractiveServer" />
+    </app>
+
+    <script src="_framework/blazor.web.js" autostart="false" defer></script>
+    <script src="https://kit.fontawesome.com/74b0be8947.js" crossorigin="anonymous"></script>
+    <script src="_content/Telerik.UI.for.Blazor/js/telerik-blazor.js" defer></script>
+    <script src="/script.js" defer></script>
+
+    @if (Env.EnvironmentName.Contains("JSDebug"))
+    {
+        <script type="module" src="https://localhost:3124/main-vite.js"></script>
+    }
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            Blazor.start();
+        });
+    </script>
+</body>
+</html>

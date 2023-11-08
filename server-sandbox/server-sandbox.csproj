@@ -1,10 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <LangVersion>8.0</LangVersion>
+    <TargetFramework>net8.0</TargetFramework>
+    <LangVersion>10.0</LangVersion>
 	<AccelerateBuildsInVisualStudio>true</AccelerateBuildsInVisualStudio>
 	<AssemblyName>server_sandbox</AssemblyName>
+	<ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 	
 

@@ -1,6 +1,7 @@
 @page "/"
 @namespace server_sandbox.Pages
-@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@inject IHostEnvironment HostEnvironment
 
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -17,16 +18,19 @@
 </head>
 <body>
     <app>
-        @(await Html.RenderComponentAsync<App>(RenderMode.ServerPrerendered))
+        <component type="typeof(App)" render-mode="ServerPrerendered" />
     </app>
 
     <script src="_framework/blazor.server.js" autostart="false" defer></script>
     <script src="https://kit.fontawesome.com/74b0be8947.js" crossorigin="anonymous"></script>
     <script src="_content/Telerik.UI.for.Blazor/js/telerik-blazor.js" defer></script>
     <script src="/script.js" defer></script>
-    <environment include="JSDebug">
+
+    @if (HostEnvironment.EnvironmentName.Contains("JSDebug"))
+    {
         <script type="module" src="https://localhost:3124/main-vite.js"></script>
-    </environment>
+    }
+
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             Blazor.start();

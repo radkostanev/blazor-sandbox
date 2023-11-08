@@ -23,6 +23,7 @@ using Playground.Shared.Services.FileManager;
 using Telerik.FontIcons;
 using Telerik.Blazor;
 using Telerik.Blazor.Components;
+using server_sandbox.Pages;
 
 namespace server_sandbox
 {
@@ -71,8 +72,9 @@ namespace server_sandbox
             // Use this if you have a localdb instance of the Database
             // services.AddDbContext<AdventureContext>(options => options.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=AdventureWorksLT2012;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"));
 
-            services.AddRazorPages();
-            services.AddServerSideBlazor().AddHubOptions(o =>
+            services.AddRazorComponents()
+                .AddInteractiveServerComponents()
+                .AddHubOptions(o =>
             {
                 o.MaximumReceiveMessageSize = 4 * 1024 * 1024; // 4MB
             });
@@ -101,9 +103,6 @@ namespace server_sandbox
             services.AddTelerikBlazor();
 
             services.AddSingleton(typeof(ITelerikStringLocalizer), typeof(CustomStringLocalizer));
-
-            // necessary for caching files in FileManager controller
-            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -123,24 +122,21 @@ namespace server_sandbox
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
-            // necessary for caching files in FileManager controller
-            app.UseSession();
-
             app.UseRouting();
+
+            app.UseAntiforgery();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapDefaultControllerRoute();
 
-                endpoints.MapBlazorHub();
+                endpoints.MapRazorComponents<App>().AddInteractiveServerRenderMode();
 
                 //endpoints.MapBlazorHub(options =>
                 //{
                 //    options.Transports = Microsoft.AspNetCore.Http.Connections.HttpTransportType.ServerSentEvents |
                 //Microsoft.AspNetCore.Http.Connections.HttpTransportType.LongPolling;
                 //});
-
-                endpoints.MapFallbackToPage("/_Host");
             });
         }
     }
