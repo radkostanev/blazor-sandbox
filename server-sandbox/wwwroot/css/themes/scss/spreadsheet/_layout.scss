@@ -63,8 +63,7 @@
         gap: $kendo-spreadsheet-formula-bar-gap;
 
         // move to legacy selector
-        > .k-icon,
-        > .k-svg-icon {
+        > .k-icon {
             padding-block: 0;
             padding-inline: $kendo-padding-md-y;
             box-sizing: content-box;
@@ -164,6 +163,7 @@
 
     .k-spreadsheet-sheets {
         flex: 1 1 auto;
+        overflow: hidden;
     }
     .k-spreadsheet-sheets .k-tabstrip-items-wrapper {
         border-width: 0;
@@ -551,8 +551,7 @@
             .k-link {
                 padding-left: calc( #{$kendo-icon-size} + #{2 * $kendo-padding-md-y} );
             }
-            .k-icon,
-            .k-svg-icon {
+            .k-icon {
                 margin-left: calc(-1 * ( #{$kendo-icon-size} + #{$kendo-padding-md-y} ) );
                 margin-right: $kendo-padding-md-y;
             }
@@ -593,7 +592,6 @@
             cursor: pointer;
 
             > .k-icon,
-            > .k-svg-icon,
             > .k-expander-indicator {
                 margin-right: $kendo-padding-md-y;
             }

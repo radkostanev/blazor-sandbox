@@ -1,11 +1,11 @@
-$ki-embed-font: true;
+$ki-embed-font: false;
 $ki-icon-size: $kendo-icon-size;
 
-@import "@progress/kendo-font-icons/scss/index.scss";
+@import "@progress/kendo-svg-icons/scss/index.scss";
 
 @mixin kendo-icon--layout-base() {
 
-    @include kendo-icon-styles();
+    @include kendo-svg-icon-styles();
 
     // Icon wrap
     .k-icon-wrap {
@@ -38,16 +38,14 @@ $ki-icon-size: $kendo-icon-size;
         margin: .25em;
     }
 
-    .k-icon-modifier {
+    .k-icon.k-icon-modifier {
+        width: 1em;
+        height: 1em;
         position: absolute;
         font-size: .5em;
         bottom: 0;
         right: 0;
         margin: 0 -.5em -.5em 0;
-    }
-    .k-svg-icon.k-icon-modifier {
-        width: 1em;
-        height: 1em;
     }
 
     .k-i-none::before {

@@ -4600,6 +4600,1381 @@
         }
     },
     {
+        "description": "The horizontal padding of the Card.\n",
+        "commentRange": {
+            "start": 5,
+            "end": 6
+        },
+        "context": {
+            "type": "variable",
+            "name": "kendo-card-padding-x",
+            "value": "k-map-get( $kendo-spacing, 4 )",
+            "scope": "default",
+            "line": {
+                "start": 7,
+                "end": 7
+            }
+        },
+        "group": [
+            "card"
+        ],
+        "access": "public",
+        "file": {
+            "path": "card/_variables.scss",
+            "name": "_variables.scss"
+        }
+    },
+    {
+        "description": "The vertical padding of the Card.\n",
+        "commentRange": {
+            "start": 8,
+            "end": 9
+        },
+        "context": {
+            "type": "variable",
+            "name": "kendo-card-padding-y",
+            "value": "k-map-get( $kendo-spacing, 3 )",
+            "scope": "default",
+            "line": {
+                "start": 10,
+                "end": 10
+            }
+        },
+        "group": [
+            "card"
+        ],
+        "access": "public",
+        "file": {
+            "path": "card/_variables.scss",
+            "name": "_variables.scss"
+        }
+    },
+    {
+        "description": "The width of the border around the Card.\n",
+        "commentRange": {
+            "start": 11,
+            "end": 12
+        },
+        "context": {
+            "type": "variable",
+            "name": "kendo-card-border-width",
+            "value": "1px",
+            "scope": "default",
+            "line": {
+                "start": 13,
+                "end": 13
+            }
+        },
+        "group": [
+            "card"
+        ],
+        "access": "public",
+        "file": {
+            "path": "card/_variables.scss",
+            "name": "_variables.scss"
+        }
+    },
+    {
+        "description": "The border radius of the Card.\n",
+        "commentRange": {
+            "start": 14,
+            "end": 15
+        },
+        "context": {
+            "type": "variable",
+            "name": "kendo-card-border-radius",
+            "value": "$kendo-border-radius-lg",
+            "scope": "default",
+            "line": {
+                "start": 16,
+                "end": 16
+            }
+        },
+        "group": [
+            "card"
+        ],
+        "access": "public",
+        "file": {
+            "path": "card/_variables.scss",
+            "name": "_variables.scss"
+        }
+    },
+    {
+        "description": "The inner border radius of the Card.\n",
+        "commentRange": {
+            "start": 17,
+            "end": 18
+        },
+        "context": {
+            "type": "variable",
+            "name": "kendo-card-inner-border-radius",
+            "value": "calc( #{$kendo-card-border-radius} - #{$kendo-card-border-width} )",
+            "scope": "default",
+            "line": {
+                "start": 19,
+                "end": 19
+            }
+        },
+        "group": [
+            "card"
+        ],
+        "access": "public",
+        "file": {
+            "path": "card/_variables.scss",
+            "name": "_variables.scss"
+        }
+    },
+    {
+        "description": "The font family of the Card.\n",
+        "commentRange": {
+            "start": 20,
+            "end": 21
+        },
+        "context": {
+            "type": "variable",
+            "name": "kendo-card-font-family",
+            "value": "$kendo-font-family",
+            "scope": "default",
+            "line": {
+                "start": 22,
+                "end": 22
+            }
+        },
+        "group": [
+            "card"
+        ],
+        "access": "public",
+        "file": {
+            "path": "card/_variables.scss",
+            "name": "_variables.scss"
+        }
+    },
+    {
+        "description": "The font size of the Card.\n",
+        "commentRange": {
+            "start": 23,
+            "end": 24
+        },
+        "context": {
+            "type": "variable",
+            "name": "kendo-card-font-size",
+            "value": "$kendo-font-size-md",
+            "scope": "default",
+            "line": {
+                "start": 25,
+                "end": 25
+            }
+        },
+        "group": [
+            "card"
+        ],
+        "access": "public",
+        "file": {
+            "path": "card/_variables.scss",
+            "name": "_variables.scss"
+        }
+    },
+    {
+        "description": "The line height of the Card.\n",
+        "commentRange": {
+            "start": 26,
+            "end": 27
+        },
+        "context": {
+            "type": "variable",
+            "name": "kendo-card-line-height",
+            "value": "$kendo-line-height-md",
+            "scope": "default",
+            "line": {
+                "start": 28,
+                "end": 28
+            }
+        },
+        "group": [
+            "card"
+        ],
+        "access": "public",
+        "file": {
+            "path": "card/_variables.scss",
+            "name": "_variables.scss"
+        }
+    },
+    {
+        "description": "The spacing between the Cards in the Card deck.\n",
+        "commentRange": {
+            "start": 30,
+            "end": 31
+        },
+        "context": {
+            "type": "variable",
+            "name": "kendo-card-deck-gap",
+            "value": "k-map-get( $kendo-spacing, 4 )",
+            "scope": "default",
+            "line": {
+                "start": 32,
+                "end": 32
+            }
+        },
+        "group": [
+            "card"
+        ],
+        "access": "public",
+        "file": {
+            "path": "card/_variables.scss",
+            "name": "_variables.scss"
+        }
+    },
+    {
+        "description": "The background color of the Card.\n",
+        "commentRange": {
+            "start": 34,
+            "end": 35
+        },
+        "context": {
+            "type": "variable",
+            "name": "kendo-card-bg",
+            "value": "$kendo-component-bg",
+            "scope": "default",
+            "line": {
+                "start": 36,
+                "end": 36
+            }
+        },
+        "group": [
+            "card"
+        ],
+        "access": "public",
+        "file": {
+            "path": "card/_variables.scss",
+            "name": "_variables.scss"
+        }
+    },
+    {
+        "description": "The text color of the Card.\n",
+        "commentRange": {
+            "start": 37,
+            "end": 38
+        },
+        "context": {
+            "type": "variable",
+            "name": "kendo-card-text",
+            "value": "$kendo-component-text",
+            "scope": "default",
+            "line": {
+                "start": 39,
+                "end": 39
+            }
+        },
+        "group": [
+            "card"
+        ],
+        "access": "public",
+        "file": {
+            "path": "card/_variables.scss",
+            "name": "_variables.scss"
+        }
+    },
+    {
+        "description": "The border color of the Card.\n",
+        "commentRange": {
+            "start": 40,
+            "end": 41
+        },
+        "context": {
+            "type": "variable",
+            "name": "kendo-card-border",
+            "value": "$kendo-component-border",
+            "scope": "default",
+            "line": {
+                "start": 42,
+                "end": 42
+            }
+        },
+        "group": [
+            "card"
+        ],
+        "access": "public",
+        "file": {
+            "path": "card/_variables.scss",
+            "name": "_variables.scss"
+        }
+    },
+    {
+        "description": "The shadow of the Card.\n",
+        "commentRange": {
+            "start": 43,
+            "end": 44
+        },
+        "context": {
+            "type": "variable",
+            "name": "kendo-card-shadow",
+            "value": "null",
+            "scope": "default",
+            "line": {
+                "start": 45,
+                "end": 45
+            }
+        },
+        "group": [
+            "card"
+        ],
+        "access": "public",
+        "file": {
+            "path": "card/_variables.scss",
+            "name": "_variables.scss"
+        }
+    },
+    {
+        "description": "The background color of the focused Card.\n",
+        "commentRange": {
+            "start": 47,
+            "end": 48
+        },
+        "context": {
+            "type": "variable",
+            "name": "kendo-card-focus-bg",
+            "value": "null",
+            "scope": "default",
+            "line": {
+                "start": 49,
+                "end": 49
+            }
+        },
+        "group": [
+            "card"
+        ],
+        "access": "public",
+        "file": {
+            "path": "card/_variables.scss",
+            "name": "_variables.scss"
+        }
+    },
+    {
+        "description": "The text color of the focused Card.\n",
+        "commentRange": {
+            "start": 50,
+            "end": 51
+        },
+        "context": {
+            "type": "variable",
+            "name": "kendo-card-focus-text",
+            "value": "null",
+            "scope": "default",
+            "line": {
+                "start": 52,
+                "end": 52
+            }
+        },
+        "group": [
+            "card"
+        ],
+        "access": "public",
+        "file": {
+            "path": "card/_variables.scss",
+            "name": "_variables.scss"
+        }
+    },
+    {
+        "description": "The border color of the focused Card.\n",
+        "commentRange": {
+            "start": 53,
+            "end": 54
+        },
+        "context": {
+            "type": "variable",
+            "name": "kendo-card-focus-border",
+            "value": "rgba( black, .15 )",
+            "scope": "default",
+            "line": {
+                "start": 55,
+                "end": 55
+            }
+        },
+        "group": [
+            "card"
+        ],
+        "access": "public",
+        "file": {
+            "path": "card/_variables.scss",
+            "name": "_variables.scss"
+        }
+    },
+    {
+        "description": "The shadow of the focused Card.\n",
+        "commentRange": {
+            "start": 59,
+            "end": 60
+        },
+        "context": {
+            "type": "variable",
+            "name": "kendo-card-focus-shadow",
+            "value": "null",
+            "scope": "default",
+            "line": {
+                "start": 61,
+                "end": 61
+            }
+        },
+        "group": [
+            "card"
+        ],
+        "access": "public",
+        "file": {
+            "path": "card/_variables.scss",
+            "name": "_variables.scss"
+        }
+    },
+    {
+        "description": "The horizontal padding of the Card header.\n",
+        "commentRange": {
+            "start": 63,
+            "end": 64
+        },
+        "context": {
+            "type": "variable",
+            "name": "kendo-card-header-padding-x",
+            "value": "$kendo-card-padding-x",
+            "scope": "default",
+            "line": {
+                "start": 65,
+                "end": 65
+            }
+        },
+        "group": [
+            "card"
+        ],
+        "access": "public",
+        "file": {
+            "path": "card/_variables.scss",
+            "name": "_variables.scss"
+        }
+    },
+    {
+        "description": "The vertical padding of the Card header.\n",
+        "commentRange": {
+            "start": 66,
+            "end": 67
+        },
+        "context": {
+            "type": "variable",
+            "name": "kendo-card-header-padding-y",
+            "value": "$kendo-card-padding-y",
+            "scope": "default",
+            "line": {
+                "start": 68,
+                "end": 68
+            }
+        },
+        "group": [
+            "card"
+        ],
+        "access": "public",
+        "file": {
+            "path": "card/_variables.scss",
+            "name": "_variables.scss"
+        }
+    },
+    {
+        "description": "The bottom border width of the Card header.\n",
+        "commentRange": {
+            "start": 69,
+            "end": 70
+        },
+        "context": {
+            "type": "variable",
+            "name": "kendo-card-header-border-width",
+            "value": "1px",
+            "scope": "default",
+            "line": {
+                "start": 71,
+                "end": 71
+            }
+        },
+        "group": [
+            "card"
+        ],
+        "access": "public",
+        "file": {
+            "path": "card/_variables.scss",
+            "name": "_variables.scss"
+        }
+    },
+    {
+        "description": "The background color of the Card header.\n",
+        "commentRange": {
+            "start": 72,
+            "end": 73
+        },
+        "context": {
+            "type": "variable",
+            "name": "kendo-card-header-bg",
+            "value": "null",
+            "scope": "default",
+            "line": {
+                "start": 74,
+                "end": 74
+            }
+        },
+        "group": [
+            "card"
+        ],
+        "access": "public",
+        "file": {
+            "path": "card/_variables.scss",
+            "name": "_variables.scss"
+        }
+    },
+    {
+        "description": "The text color of the Card header.\n",
+        "commentRange": {
+            "start": 75,
+            "end": 76
+        },
+        "context": {
+            "type": "variable",
+            "name": "kendo-card-header-text",
+            "value": "$kendo-component-header-text",
+            "scope": "default",
+            "line": {
+                "start": 77,
+                "end": 77
+            }
+        },
+        "group": [
+            "card"
+        ],
+        "access": "public",
+        "file": {
+            "path": "card/_variables.scss",
+            "name": "_variables.scss"
+        }
+    },
+    {
+        "description": "The border color of the Card header.\n",
+        "commentRange": {
+            "start": 78,
+            "end": 79
+        },
+        "context": {
+            "type": "variable",
+            "name": "kendo-card-header-border",
+            "value": "$kendo-component-header-border",
+            "scope": "default",
+            "line": {
+                "start": 80,
+                "end": 80
+            }
+        },
+        "group": [
+            "card"
+        ],
+        "access": "public",
+        "file": {
+            "path": "card/_variables.scss",
+            "name": "_variables.scss"
+        }
+    },
+    {
+        "description": "The horizontal padding of the Card body.\n",
+        "commentRange": {
+            "start": 82,
+            "end": 83
+        },
+        "context": {
+            "type": "variable",
+            "name": "kendo-card-body-padding-x",
+            "value": "k-map-get( $kendo-spacing, 4 )",
+            "scope": "default",
+            "line": {
+                "start": 84,
+                "end": 84
+            }
+        },
+        "group": [
+            "card"
+        ],
+        "access": "public",
+        "file": {
+            "path": "card/_variables.scss",
+            "name": "_variables.scss"
+        }
+    },
+    {
+        "description": "The vertical padding of the Card body.\n",
+        "commentRange": {
+            "start": 85,
+            "end": 86
+        },
+        "context": {
+            "type": "variable",
+            "name": "kendo-card-body-padding-y",
+            "value": "k-map-get( $kendo-spacing, 4 )",
+            "scope": "default",
+            "line": {
+                "start": 87,
+                "end": 87
+            }
+        },
+        "group": [
+            "card"
+        ],
+        "access": "public",
+        "file": {
+            "path": "card/_variables.scss",
+            "name": "_variables.scss"
+        }
+    },
+    {
+        "description": "The horizontal padding of the Card footer.\n",
+        "commentRange": {
+            "start": 89,
+            "end": 90
+        },
+        "context": {
+            "type": "variable",
+            "name": "kendo-card-footer-padding-x",
+            "value": "$kendo-card-padding-x",
+            "scope": "default",
+            "line": {
+                "start": 91,
+                "end": 91
+            }
+        },
+        "group": [
+            "card"
+        ],
+        "access": "public",
+        "file": {
+            "path": "card/_variables.scss",
+            "name": "_variables.scss"
+        }
+    },
+    {
+        "description": "The vertical padding of the Card footer.\n",
+        "commentRange": {
+            "start": 92,
+            "end": 93
+        },
+        "context": {
+            "type": "variable",
+            "name": "kendo-card-footer-padding-y",
+            "value": "$kendo-card-padding-y",
+            "scope": "default",
+            "line": {
+                "start": 94,
+                "end": 94
+            }
+        },
+        "group": [
+            "card"
+        ],
+        "access": "public",
+        "file": {
+            "path": "card/_variables.scss",
+            "name": "_variables.scss"
+        }
+    },
+    {
+        "description": "The top border width of the Card footer.\n",
+        "commentRange": {
+            "start": 95,
+            "end": 96
+        },
+        "context": {
+            "type": "variable",
+            "name": "kendo-card-footer-border-width",
+            "value": "1px",
+            "scope": "default",
+            "line": {
+                "start": 97,
+                "end": 97
+            }
+        },
+        "group": [
+            "card"
+        ],
+        "access": "public",
+        "file": {
+            "path": "card/_variables.scss",
+            "name": "_variables.scss"
+        }
+    },
+    {
+        "description": "The background color of the Card footer.\n",
+        "commentRange": {
+            "start": 98,
+            "end": 99
+        },
+        "context": {
+            "type": "variable",
+            "name": "kendo-card-footer-bg",
+            "value": "null",
+            "scope": "default",
+            "line": {
+                "start": 100,
+                "end": 100
+            }
+        },
+        "group": [
+            "card"
+        ],
+        "access": "public",
+        "file": {
+            "path": "card/_variables.scss",
+            "name": "_variables.scss"
+        }
+    },
+    {
+        "description": "The text color of the Card footer.\n",
+        "commentRange": {
+            "start": 101,
+            "end": 102
+        },
+        "context": {
+            "type": "variable",
+            "name": "kendo-card-footer-text",
+            "value": "$kendo-component-header-text",
+            "scope": "default",
+            "line": {
+                "start": 103,
+                "end": 103
+            }
+        },
+        "group": [
+            "card"
+        ],
+        "access": "public",
+        "file": {
+            "path": "card/_variables.scss",
+            "name": "_variables.scss"
+        }
+    },
+    {
+        "description": "The border color of the Card footer.\n",
+        "commentRange": {
+            "start": 104,
+            "end": 105
+        },
+        "context": {
+            "type": "variable",
+            "name": "kendo-card-footer-border",
+            "value": "$kendo-component-header-border",
+            "scope": "default",
+            "line": {
+                "start": 106,
+                "end": 106
+            }
+        },
+        "group": [
+            "card"
+        ],
+        "access": "public",
+        "file": {
+            "path": "card/_variables.scss",
+            "name": "_variables.scss"
+        }
+    },
+    {
+        "description": "The bottom margin of the Card title.\n",
+        "commentRange": {
+            "start": 108,
+            "end": 109
+        },
+        "context": {
+            "type": "variable",
+            "name": "kendo-card-title-margin-bottom",
+            "value": "k-map-get( $kendo-spacing, 2 )",
+            "scope": "default",
+            "line": {
+                "start": 110,
+                "end": 110
+            }
+        },
+        "group": [
+            "card"
+        ],
+        "access": "public",
+        "file": {
+            "path": "card/_variables.scss",
+            "name": "_variables.scss"
+        }
+    },
+    {
+        "description": "The font size of the Card title.\n",
+        "commentRange": {
+            "start": 111,
+            "end": 112
+        },
+        "context": {
+            "type": "variable",
+            "name": "kendo-card-title-font-size",
+            "value": "$kendo-h5-font-size",
+            "scope": "default",
+            "line": {
+                "start": 113,
+                "end": 113
+            }
+        },
+        "group": [
+            "card"
+        ],
+        "access": "public",
+        "file": {
+            "path": "card/_variables.scss",
+            "name": "_variables.scss"
+        }
+    },
+    {
+        "description": "The font family of the Card title.\n",
+        "commentRange": {
+            "start": 114,
+            "end": 115
+        },
+        "context": {
+            "type": "variable",
+            "name": "kendo-card-title-font-family",
+            "value": "null",
+            "scope": "default",
+            "line": {
+                "start": 116,
+                "end": 116
+            }
+        },
+        "group": [
+            "card"
+        ],
+        "access": "public",
+        "file": {
+            "path": "card/_variables.scss",
+            "name": "_variables.scss"
+        }
+    },
+    {
+        "description": "The line height of the Card title.\n",
+        "commentRange": {
+            "start": 117,
+            "end": 118
+        },
+        "context": {
+            "type": "variable",
+            "name": "kendo-card-title-line-height",
+            "value": "1.25",
+            "scope": "default",
+            "line": {
+                "start": 119,
+                "end": 119
+            }
+        },
+        "group": [
+            "card"
+        ],
+        "access": "public",
+        "file": {
+            "path": "card/_variables.scss",
+            "name": "_variables.scss"
+        }
+    },
+    {
+        "description": "The font weight of the Card title.\n",
+        "commentRange": {
+            "start": 120,
+            "end": 121
+        },
+        "context": {
+            "type": "variable",
+            "name": "kendo-card-title-font-weight",
+            "value": "$kendo-font-weight-normal",
+            "scope": "default",
+            "line": {
+                "start": 122,
+                "end": 122
+            }
+        },
+        "group": [
+            "card"
+        ],
+        "access": "public",
+        "file": {
+            "path": "card/_variables.scss",
+            "name": "_variables.scss"
+        }
+    },
+    {
+        "description": "The letter spacing of the Card title.\n",
+        "commentRange": {
+            "start": 123,
+            "end": 124
+        },
+        "context": {
+            "type": "variable",
+            "name": "kendo-card-title-letter-spacing",
+            "value": "null",
+            "scope": "default",
+            "line": {
+                "start": 125,
+                "end": 125
+            }
+        },
+        "group": [
+            "card"
+        ],
+        "access": "public",
+        "file": {
+            "path": "card/_variables.scss",
+            "name": "_variables.scss"
+        }
+    },
+    {
+        "description": "The bottom margin of the Card subtitle.\n",
+        "commentRange": {
+            "start": 127,
+            "end": 128
+        },
+        "context": {
+            "type": "variable",
+            "name": "kendo-card-subtitle-margin-bottom",
+            "value": "k-map-get( $kendo-spacing, 2 )",
+            "scope": "default",
+            "line": {
+                "start": 129,
+                "end": 129
+            }
+        },
+        "group": [
+            "card"
+        ],
+        "access": "public",
+        "file": {
+            "path": "card/_variables.scss",
+            "name": "_variables.scss"
+        }
+    },
+    {
+        "description": "The font size of the Card subtitle.\n",
+        "commentRange": {
+            "start": 130,
+            "end": 131
+        },
+        "context": {
+            "type": "variable",
+            "name": "kendo-card-subtitle-font-size",
+            "value": "$kendo-font-size-sm",
+            "scope": "default",
+            "line": {
+                "start": 132,
+                "end": 132
+            }
+        },
+        "group": [
+            "card"
+        ],
+        "access": "public",
+        "file": {
+            "path": "card/_variables.scss",
+            "name": "_variables.scss"
+        }
+    },
+    {
+        "description": "The font family of the Card subtitle.\n",
+        "commentRange": {
+            "start": 133,
+            "end": 134
+        },
+        "context": {
+            "type": "variable",
+            "name": "kendo-card-subtitle-font-family",
+            "value": "null",
+            "scope": "default",
+            "line": {
+                "start": 135,
+                "end": 135
+            }
+        },
+        "group": [
+            "card"
+        ],
+        "access": "public",
+        "file": {
+            "path": "card/_variables.scss",
+            "name": "_variables.scss"
+        }
+    },
+    {
+        "description": "The line height of the Card subtitle.\n",
+        "commentRange": {
+            "start": 136,
+            "end": 137
+        },
+        "context": {
+            "type": "variable",
+            "name": "kendo-card-subtitle-line-height",
+            "value": "normal",
+            "scope": "default",
+            "line": {
+                "start": 138,
+                "end": 138
+            }
+        },
+        "group": [
+            "card"
+        ],
+        "access": "public",
+        "file": {
+            "path": "card/_variables.scss",
+            "name": "_variables.scss"
+        }
+    },
+    {
+        "description": "The font weight of the Card subtitle.\n",
+        "commentRange": {
+            "start": 139,
+            "end": 140
+        },
+        "context": {
+            "type": "variable",
+            "name": "kendo-card-subtitle-font-weight",
+            "value": "$kendo-font-weight-normal",
+            "scope": "default",
+            "line": {
+                "start": 141,
+                "end": 141
+            }
+        },
+        "group": [
+            "card"
+        ],
+        "access": "public",
+        "file": {
+            "path": "card/_variables.scss",
+            "name": "_variables.scss"
+        }
+    },
+    {
+        "description": "The letter spacing of the Card subtitle.\n",
+        "commentRange": {
+            "start": 142,
+            "end": 143
+        },
+        "context": {
+            "type": "variable",
+            "name": "kendo-card-subtitle-letter-spacing",
+            "value": "null",
+            "scope": "default",
+            "line": {
+                "start": 144,
+                "end": 144
+            }
+        },
+        "group": [
+            "card"
+        ],
+        "access": "public",
+        "file": {
+            "path": "card/_variables.scss",
+            "name": "_variables.scss"
+        }
+    },
+    {
+        "description": "The text color of the Card subtitle.\n",
+        "commentRange": {
+            "start": 145,
+            "end": 146
+        },
+        "context": {
+            "type": "variable",
+            "name": "kendo-card-subtitle-text",
+            "value": "$kendo-subtle-text",
+            "scope": "default",
+            "line": {
+                "start": 147,
+                "end": 147
+            }
+        },
+        "group": [
+            "card"
+        ],
+        "access": "public",
+        "file": {
+            "path": "card/_variables.scss",
+            "name": "_variables.scss"
+        }
+    },
+    {
+        "description": "The maximum width of the Card image.\n",
+        "commentRange": {
+            "start": 149,
+            "end": 150
+        },
+        "context": {
+            "type": "variable",
+            "name": "kendo-card-img-max-width",
+            "value": "100px",
+            "scope": "default",
+            "line": {
+                "start": 151,
+                "end": 151
+            }
+        },
+        "group": [
+            "card"
+        ],
+        "access": "public",
+        "file": {
+            "path": "card/_variables.scss",
+            "name": "_variables.scss"
+        }
+    },
+    {
+        "description": "The size of the Avatar in the Card.\n",
+        "commentRange": {
+            "start": 152,
+            "end": 153
+        },
+        "context": {
+            "type": "variable",
+            "name": "kendo-card-avatar-size",
+            "value": "45px",
+            "scope": "default",
+            "line": {
+                "start": 154,
+                "end": 154
+            }
+        },
+        "group": [
+            "card"
+        ],
+        "access": "public",
+        "file": {
+            "path": "card/_variables.scss",
+            "name": "_variables.scss"
+        }
+    },
+    {
+        "description": "The spacing between the Avatar and the text in the Card.\n",
+        "commentRange": {
+            "start": 155,
+            "end": 156
+        },
+        "context": {
+            "type": "variable",
+            "name": "kendo-card-avatar-spacing",
+            "value": "$kendo-card-header-padding-x",
+            "scope": "default",
+            "line": {
+                "start": 157,
+                "end": 157
+            }
+        },
+        "group": [
+            "card"
+        ],
+        "access": "public",
+        "file": {
+            "path": "card/_variables.scss",
+            "name": "_variables.scss"
+        }
+    },
+    {
+        "description": "The horizontal padding of the Card actions.\n",
+        "commentRange": {
+            "start": 159,
+            "end": 160
+        },
+        "context": {
+            "type": "variable",
+            "name": "kendo-card-actions-padding-x",
+            "value": "k-map-get( $kendo-spacing, 2 )",
+            "scope": "default",
+            "line": {
+                "start": 161,
+                "end": 161
+            }
+        },
+        "group": [
+            "card"
+        ],
+        "access": "public",
+        "file": {
+            "path": "card/_variables.scss",
+            "name": "_variables.scss"
+        }
+    },
+    {
+        "description": "The vertical padding of the Card actions.\n",
+        "commentRange": {
+            "start": 162,
+            "end": 163
+        },
+        "context": {
+            "type": "variable",
+            "name": "kendo-card-actions-padding-y",
+            "value": "k-map-get( $kendo-spacing, 2 )",
+            "scope": "default",
+            "line": {
+                "start": 164,
+                "end": 164
+            }
+        },
+        "group": [
+            "card"
+        ],
+        "access": "public",
+        "file": {
+            "path": "card/_variables.scss",
+            "name": "_variables.scss"
+        }
+    },
+    {
+        "description": "The top border width of the Card actions.\n",
+        "commentRange": {
+            "start": 165,
+            "end": 166
+        },
+        "context": {
+            "type": "variable",
+            "name": "kendo-card-actions-border-width",
+            "value": "1px",
+            "scope": "default",
+            "line": {
+                "start": 167,
+                "end": 167
+            }
+        },
+        "group": [
+            "card"
+        ],
+        "access": "public",
+        "file": {
+            "path": "card/_variables.scss",
+            "name": "_variables.scss"
+        }
+    },
+    {
+        "description": "The spacing between the Card actions.\n",
+        "commentRange": {
+            "start": 168,
+            "end": 169
+        },
+        "context": {
+            "type": "variable",
+            "name": "kendo-card-actions-gap",
+            "value": "k-map-get( $kendo-spacing, 2 )",
+            "scope": "default",
+            "line": {
+                "start": 170,
+                "end": 170
+            }
+        },
+        "group": [
+            "card"
+        ],
+        "access": "public",
+        "file": {
+            "path": "card/_variables.scss",
+            "name": "_variables.scss"
+        }
+    },
+    {
+        "description": "The border radius of the scroll button in the Card deck.\n",
+        "commentRange": {
+            "start": 172,
+            "end": 173
+        },
+        "context": {
+            "type": "variable",
+            "name": "kendo-card-deck-scroll-button-radius",
+            "value": "0px",
+            "scope": "default",
+            "line": {
+                "start": 174,
+                "end": 174
+            }
+        },
+        "group": [
+            "card"
+        ],
+        "access": "public",
+        "file": {
+            "path": "card/_variables.scss",
+            "name": "_variables.scss"
+        }
+    },
+    {
+        "description": "The border radius of the scroll button in the Card deck.\n",
+        "commentRange": {
+            "start": 175,
+            "end": 176
+        },
+        "context": {
+            "type": "variable",
+            "name": "kendo-card-deck-scroll-button-offset",
+            "value": "-$kendo-button-border-width",
+            "scope": "default",
+            "line": {
+                "start": 177,
+                "end": 177
+            }
+        },
+        "group": [
+            "card"
+        ],
+        "access": "public",
+        "file": {
+            "path": "card/_variables.scss",
+            "name": "_variables.scss"
+        }
+    },
+    {
+        "description": "The width of the Card callout.\n",
+        "commentRange": {
+            "start": 179,
+            "end": 180
+        },
+        "context": {
+            "type": "variable",
+            "name": "kendo-card-callout-width",
+            "value": "20px",
+            "scope": "default",
+            "line": {
+                "start": 181,
+                "end": 181
+            }
+        },
+        "group": [
+            "card"
+        ],
+        "access": "public",
+        "file": {
+            "path": "card/_variables.scss",
+            "name": "_variables.scss"
+        }
+    },
+    {
+        "description": "The height of the Card callout.\n",
+        "commentRange": {
+            "start": 182,
+            "end": 183
+        },
+        "context": {
+            "type": "variable",
+            "name": "kendo-card-callout-height",
+            "value": "20px",
+            "scope": "default",
+            "line": {
+                "start": 184,
+                "end": 184
+            }
+        },
+        "group": [
+            "card"
+        ],
+        "access": "public",
+        "file": {
+            "path": "card/_variables.scss",
+            "name": "_variables.scss"
+        }
+    },
+    {
         "description": "The first base series color and its light and dark shades.\n",
         "commentRange": {
             "start": 6,
