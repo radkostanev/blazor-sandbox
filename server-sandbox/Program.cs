@@ -80,6 +80,8 @@ builder.Services.AddTelerikBlazor();
 
 builder.Services.AddSingleton(typeof(ITelerikStringLocalizer), typeof(CustomStringLocalizer));
 
+builder.Services.AddSession();
+
 var app = builder.Build();
 
 if (!app.Environment.IsDevelopment() || !app.Environment.IsEnvironment("JSDebug"))
@@ -94,9 +96,8 @@ else
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
+app.UseSession();
 app.UseRouting();
-
 app.UseAntiforgery();
 
 app.MapRazorComponents<App>().AddInteractiveServerRenderMode();
